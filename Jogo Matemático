@@ -1,0 +1,97 @@
+package jogomatematica;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class jogomatematica {
+	public static void main(String[] args) {
+		int tentativa = 5;
+		int dificuldade = 1;
+		int score = 0;
+		int selecao = 0;
+		Scanner sc = new Scanner(System.in);
+		Random rand = new Random();
+		int resposta = 0;
+		
+		while (selecao != 2){
+			System.out.println("1 - Novo jogo");
+			System.out.println("2 - Sair");
+			System.out.print("O que você deseja? ");
+			selecao = sc.nextInt();
+			
+			if ( selecao == 1 ){
+				System.out.println("");
+				System.out.println("");
+				while( tentativa > 0 ){
+					System.out.println("tentativas: "+tentativa);
+					System.out.println("dificuldade: "+dificuldade);
+					System.out.println("");
+
+					if ( dificuldade == 1 ){
+						int a1 = rand.nextInt(20);
+						int a2 = rand.nextInt(20);
+						int conta = rand.nextInt(2);
+						if ( conta == 0 ){
+							resposta = a1 + a2;
+							System.out.print(a1 + " + " + a2 + " = ");
+						} else {
+							resposta = a1 - a2;
+							System.out.print(a1 + " - " + a2 + " = ");
+						}
+					} else if ( dificuldade == 2 ){
+						int a1 = rand.nextInt(100);
+						int a2 = rand.nextInt(10);
+						int conta = rand.nextInt(2);
+						if ( conta == 0 ){
+							resposta = a1 * a2;
+							System.out.print(a1 + " * " + a2 + " = ");
+						} else {
+							while ( a2 == 0 ){
+								a2 = rand.nextInt(10);
+							}
+							resposta = (int) a1 / a2;
+							System.out.print("Apenas o inteiro de: " + a1 + " / " + a2 + " = ");
+						}
+					} else if ( dificuldade == 3 ){
+						int a1 = rand.nextInt(100);
+						int a2 = rand.nextInt(10);
+						int conta = rand.nextInt(4);
+						if ( conta == 0 ){
+							resposta = a1 + a2;
+							System.out.print(a1 + " + " + a2 + " = ");
+						} else if ( conta == 1 ) {
+							resposta = a1 - a2;
+							System.out.print(a1 + " - " + a2 + " = ");
+						} else if ( conta == 3 ){
+							resposta = a1 * a2;
+							System.out.print(a1 + " * " + a2 + " = ");
+						} else {
+							while ( a2 == 0 ){
+								a2 = rand.nextInt(10);
+							}
+							resposta = (int) a1 / a2;
+							System.out.print("Apenas o inteiro de: " + a1 + " / " + a2 + " = ");
+						}
+					}
+
+					int res = sc.nextInt();
+					if ( res == resposta ){
+						System.out.println("Você acertou!");
+						score++;
+						if ( score == 10 && dificuldade < 3 ){
+							System.out.println("Parabens, você passou de dificuldade!");
+							dificuldade++;
+							score = 0;
+						}
+					} else {
+						System.out.println("Você errou!");
+						tentativa--;
+					}
+					System.out.println("");
+					System.out.println("");
+				}
+				System.out.println("Fim de jogo!");
+			}
+		}
+	}
+}
